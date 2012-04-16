@@ -22,7 +22,7 @@
 
 # convert the file from stdin to the html file $1
 function convert_to_html() {
-    pandoc -o $1
+    pandoc -t html
 }
 
 HEADER='<!DOCTYPE html>
@@ -72,9 +72,9 @@ NAV=$NAV'</ul></div>'
 while [ "$#" -gt 0 ];
 do
     FILE=$1
+    FILENAME=$(generate_filename $FILE)
     BODY=$(sed '1d' $FILE | convert_to_html | \
         sed 's/<\(code\|pre\)>/<\1 class="prettyprint">/g')
-    FILENAME=$(generate_filename $FILE)
     # generate html
     cat > $FILENAME <<_
 $(sed "s/TITLE/$FILENAME/g" <<EOF
