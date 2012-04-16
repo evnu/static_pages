@@ -60,7 +60,7 @@ do
     echo $(generate_filename $file) $CREATION_DATE
 done | sort -k 2 | awk '{print $1}')
 
-NAV='<div class="sitenav"><ul>
+NAV='<div id="sitenav"><ul>
 '
 
 for file in $FILES;
