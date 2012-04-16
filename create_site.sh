@@ -25,6 +25,15 @@ function convert_to_html() {
     pandoc -t html
 }
 
+# convert a string to a string without /
+function sanitize_title() {
+    echo $1 | tr "/" " "
+}
+
+function generate_filename() {
+    echo ${1%%.*}.html
+}
+
 HEADER='<!DOCTYPE html>
 <html>
     <head>
@@ -41,10 +50,6 @@ FOOTER='
 </body>
 </html>
 '
-
-function generate_filename() {
-    echo ${1%%.*}.html
-}
 
 # build the navigation by using all arguments, ordered by creation
 # time of the respective files..
@@ -71,15 +76,14 @@ NAV=$NAV'</ul></div>'
 
 # for all arguments:
 # insert class="prettyprint" into code sections
-while [ "$#" -gt 0 ];
+for FILE in $@;
 do
-    FILE=$1
     FILENAME=$(generate_filename $FILE)
     BODY=$(sed '1d' $FILE | convert_to_html | \
         sed 's/<\(code\|pre\)>/<\1 class="prettyprint">/g')
     # generate html
     cat > $FILENAME <<_
-$(sed "s/TITLE/$FILENAME/g" <<EOF
+$(sed "s/TITLE/$(sanitize_title $FILENAME)/g" <<EOF
 $HEADER
 EOF
 )
@@ -87,6 +91,5 @@ $NAV
 $BODY
 $FOOTER 
 _
-    shift
 done
 
