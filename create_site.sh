@@ -28,6 +28,7 @@ function convert_to_html() {
 HEADER='<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
         <link href="prettify.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="prettify.js"></script>
         <title>TITLE</title>
