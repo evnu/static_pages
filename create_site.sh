@@ -10,16 +10,20 @@
 # Requires:
 #  * bash
 #  * sed
-#  * tidy-html5 from github: https://github.com/w3c/tidy-html5
-#  * markdown to html converter, e.g. python-markdown
-#    please set MARKDOWN_EXECUTABLE accordingly below
+#  * markdown to html converter, e.g. pandoc.
+#    Please edit the function convert_to_html if you want to use another converter 
+#    than markdown.
+
 # The resulting HTML makes use of the javascript code prettifier:
 #   https://google-code-prettify.googlecode.com/svn/trunk/README.html
 #  This library needs the css class "prettyprint" to recognize code. That class
 #   is added using sed.
 #
 
-MARKDOWN_EXECUTABLE=markdown_py
+# convert the file from stdin to the html file $1
+function convert_to_html() {
+    pandoc -o $1
+}
 
 HEADER='<!DOCTYPE html>
 <html>
@@ -68,7 +72,7 @@ NAV=$NAV'</ul></div>'
 while [ "$#" -gt 0 ];
 do
     FILE=$1
-    BODY=$(sed '1d' $FILE | $MARKDOWN_EXECUTABLE | \
+    BODY=$(sed '1d' $FILE | convert_to_html | \
         sed 's/<\(code\|pre\)>/<\1 class="prettyprint">/g')
     FILENAME=$(generate_filename $FILE)
     # generate html
