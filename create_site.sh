@@ -29,6 +29,7 @@ HEADER='<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
+        <link type="text/css" rel="stylesheet" href="static_pages.css" />
         <link href="prettify.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="prettify.js"></script>
         <title>TITLE</title>
