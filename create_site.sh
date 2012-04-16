@@ -4,7 +4,7 @@
 # to create a static html website
 #
 # XXX NOTE:
-#   * The first line in a document provided as an argument must be a date, which is used
+#   * The first line in the provided documents must be a date, which is used
 #   for sorting the files
 #
 # Requires:
@@ -15,6 +15,8 @@
 #    please set MARKDOWN_EXECUTABLE accordingly below
 # The resulting HTML makes use of the javascript code prettifier:
 #   https://google-code-prettify.googlecode.com/svn/trunk/README.html
+#  This library needs the css class "prettyprint" to recognize code. That class
+#   is added using sed.
 #
 
 MARKDOWN_EXECUTABLE=markdown_py
