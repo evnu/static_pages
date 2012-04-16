@@ -88,7 +88,9 @@ $HEADER
 EOF
 )
 $NAV
+<div id="content">
 $BODY
+</div>
 $FOOTER 
 _
 done
