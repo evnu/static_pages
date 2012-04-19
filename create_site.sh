@@ -39,6 +39,7 @@ HEADER='<!DOCTYPE html>
     <head>
         <meta charset="UTF-8" />
         <link type="text/css" rel="stylesheet" href="static_pages.css" />
+        <script type="text/javascript" src="static_pages.js"></script>
         <link href="prettify.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="prettify.js"></script>
         <title>TITLE</title>
