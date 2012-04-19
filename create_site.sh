@@ -59,7 +59,7 @@ FILES=$(for file in $@;
 do
     CREATION_DATE=$(head -n1 $file)
     echo $(generate_filename $file) $CREATION_DATE
-done | sed 's/%//g' | column -t | sort -k3 -k4M -k5 -k7 | tee hello | awk '{print $1}')
+done | sed 's/%//g' | column -t | sort -k3 -k4M -k5 -k7 | awk '{print $1}')
 
 NAV='<div id="sitenav"><ul>
 '
