@@ -48,6 +48,9 @@ HEADER='<!DOCTYPE html>
 '
 
 FOOTER='
+    <div id="footer">
+        <em>Created</em> CREATED, <em>last updated</em> LASTUPDATE
+    </div>
 </body>
 </html>
 '
@@ -80,8 +83,15 @@ NAV=$NAV'</ul></div>'
 for FILE in $@;
 do
     FILENAME=$(generate_filename $FILE)
+    CREATION_DATE=$(head -n1 $FILE)
+
+    # insert classes for code highlighting
     BODY=$(sed '1d' $FILE | convert_to_html | \
         sed 's/<\(code\|pre\)>/<\1 class="prettyprint">/g')
+
+    # insert the creation date into the footer..
+    FILE_FOOTER=$(echo $FOOTER | m4 -DCREATED="$CREATION_DATE" | sed 's/%//g')
+
     # generate html
     cat > $FILENAME <<_
 $(sed "s/TITLE/$(sanitize_title $FILENAME)/g" <<EOF
@@ -92,7 +102,7 @@ $NAV
 <div id="content">
 $BODY
 </div>
-$FOOTER 
+$FILE_FOOTER 
 _
 done
 
