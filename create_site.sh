@@ -60,9 +60,9 @@ FOOTER='
 
 FILES=$(for file in $@;
 do
-    CREATION_DATE=$(head -n1 $file)
+    CREATION_DATE=$(date -d "$(head -n1 $file | sed 's/%//g')" +%s)
     echo $(generate_filename $file) $CREATION_DATE
-done | sed 's/%//g' | column -t | sort -k3 -k4M -k5 -k7 | awk '{print $1}')
+done | sed 's/%//g' | column -t | sort -k2 | awk '{print $1}')
 
 NAV='<div id="sitenav"><ul>
 '
